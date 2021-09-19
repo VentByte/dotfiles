@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ "$1" == "copyback" ]; then
+
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y git zsh curl wget gnupg2 lsb-release software-properties-common hcloud-cli
+
+# oh-my-zsh
+mkdir $HOME/.local
+export ZSH=$HOME/.local/oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo usermod --shell $(which zsh) $(whoami)
+
+# Terraform
+curl -s https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+# kubectl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-add-repository "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+
+# helm
+curl -s https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
+
+# Install packages
+sudo apt update
+sudo apt install -y hcloud-cli terraform kubectl helm
