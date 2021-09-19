@@ -33,3 +33,10 @@ if [ $? -ne 0 ]; then
   rm -rf $GPG_AGENT_SOCK
   setsid nohup socat UNIX-LISTEN:$GPG_AGENT_SOCK,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
 fi
+
+
+# hcloud completion
+source <(hcloud completion zsh)
+
+# Terraform completion
+complete -o nospace -C /usr/bin/terraform terraform
