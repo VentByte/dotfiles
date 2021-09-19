@@ -1,4 +1,10 @@
 [user]
-name      = Fabian Dietl
-email     = fabian_dietl@yeetlab.net
-username  = VentByte
+name       = Fabian Dietl
+email      = fabian.dietl@yeetlab.net
+username   = VentByte
+signingkey = "30CF8C0F3DE5D9AAFDB039D8ED2EC5FC4C8C4DED"
+
+[gpg]
+    program = gpg2
+[commit]
+    gpgsign = true
